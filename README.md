@@ -5,8 +5,8 @@
 
 Notes:
 
-1. This is guiding sample, doesn't have code for handling failed insertion docs and read docs. Please handle based on your requirement.
+1. This is a guiding sample and doesn't have the code for handling failed insertion docs and read docs after certain number of retries. Please look at the code to increase the retires for failed operation in case of Request rate Large error.
 
-2. Use DocsCount and BatchSize to adjust the numbers threads going to write to Cosmos Mongo DB. The same applies to Read scenario also.
- 
-3. Request Rate Large is an error throws by server to signal the client I have more load than expected so the client has to slowdown and start write again. In this sample wait time gets assign to thead in between minimum and maximum. Please look at MinWait and MaxWait in code.
+2. Use DocsCount and BatchSize to adjust the numbers threads parallel can write to Cosmos Mongo DB. The same applies to Read scenario also.
+
+3. Request Rate Large error is a signal sends by server to client requesting to lower the number of requests submitting as it is exceeding the provisioned RUs . In this sample this was handled using sleep. Each thread will for few milliseconds with in the range of (MinWait, MaxWait).
